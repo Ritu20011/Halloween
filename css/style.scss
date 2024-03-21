@@ -9,6 +9,11 @@
 //     src: url('../fonts/BloodyTerror-GOW9Z.ttf');
 //   }
 
+
+$primary: #e0af56;
+$seconodary: #1a0025;
+$white: #fff;
+
 @mixin flex() {
     display: flex;
     flex-wrap: wrap;
@@ -18,12 +23,17 @@
     row-gap: 20px;
 }
 
-
-$primary: #e0af56;
-$seconodary: #1a0025;
-$white: #fff;
-
-
+@mixin head($font: 7vw){
+    font-size: $font;
+    font-family: "Creepster", system-ui;
+    background: linear-gradient(to top, #6432b6, #7d319f, #ce416a, #b52e4b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    // -webkit-text-stroke: 2px #370b17;
+    position: relative;
+    text-align: center;
+    line-height: 1;
+}
 
 %abc {
     color: $primary;
@@ -58,6 +68,9 @@ body {
     color: $white;
 }
 
+// ==============================
+
+
 .main {
     background-color: $seconodary;
     position: relative;
@@ -83,22 +96,34 @@ body {
 
 h1,
 .h1 {
-    font: 400 120px/1.5 "Creepster", system-ui;
-    background: linear-gradient(to top, #6432b6, #7d319f, #ce416a, #b52e4b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 2px #370b17;
-    position: relative;
-
-    &::after {
-        content: attr(title);
-        position: absolute;
-        top: 0;
-        left: 0;
-        color: red;
-    }
+    @include head();
 }
-
+h2,
+.h2 {
+    @include head($font: 3.5vw);
+    background: linear-gradient(to top, #f9e30c, #c66736 80%, #882d5b);
+    -webkit-background-clip: text;
+    z-index: 2;
+}
+.offer{
+    @include head($font: 3.5vw);
+    -webkit-text-fill-color: #e0af56;
+    text-shadow: 0 0 1px #370b17;
+    -webkit-background-clip: unset;
+    background-image: url(../images/blood.png);
+    background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 50px 30px;
+  margin-top: -20px;
+}
+.btn{
+    color: $seconodary;
+    background-color: $primary;
+    border-radius: 20px;
+    padding: 7px 40px;
+    font-size: 20px;
+    font-weight: 700;
+}
 .topNav {
     @include flex();
 }
@@ -123,7 +148,10 @@ h1,
 }
 
 .content {
-    padding: 0 30px;
+    width: 40vw;
+    margin: auto;
+    text-align: center;
+    position: relative;
 }
 
 footer {
@@ -135,3 +163,45 @@ footer {
     height: 80%;
     filter: drop-shadow(0px -10px 104px #902dac);
 }
+p{
+    margin: 10px 0 30px; 
+}
+.bhoot{
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 9vw;
+    &.bhoot1{
+        left: 50%;
+        // top: 50%;
+        // animation-name: left, toggle;
+        // animation-duration: 3s;
+        // animation-fill-mode: forwards;
+        animation: left 2s ease-in-out forwards, toggle1 3s ease-in-out infinite alternate;
+    }
+    &.bhoot2{
+        right: 50%;
+        // animation-name: right;
+        // animation-duration: 3s;
+        animation: right 2s ease-in-out forwards, toggle2 3s ease-in-out infinite alternate;
+    }
+}
+
+@keyframes left {
+    from {left: 50%;}
+    to {left: 0;}
+  }
+  @keyframes right {
+    from {right: 50%;}
+    to {right: 0;}
+  }
+  @keyframes toggle1 {
+    0% {top: 50%;}
+    50% {top: 45%;}
+    100% {top: 50%;}
+  }
+  @keyframes toggle2 {
+    0% {top: 50%;}
+    50% {top: 40%;}
+    100% {top: 50%;}
+  }
