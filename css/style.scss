@@ -57,6 +57,10 @@ $red: #f00;
     margin: 0;
 }
 
+::selection {
+    background-color: $red;
+}
+
 img {
     max-width: 100%;
 }
@@ -143,6 +147,7 @@ h2,
 
 .topNav {
     @include flex();
+    position: relative
 }
 
 .mainNav {
@@ -162,6 +167,12 @@ h2,
 
 .toggler {
     @extend %abc;
+    display: none;
+}
+
+.close {
+    @extend %abc;
+    display: none;
 }
 
 .logo {
@@ -221,7 +232,7 @@ p {
     }
 
     &.bat2 {
-        animation: bat2 4s ease-in-out infinite;
+        animation: bat2 4s ease-in-out 1s infinite;
     }
 }
 
@@ -234,7 +245,7 @@ p {
     &.rbat1 {
         right: 5%;
         top: 40%;
-        // animation: rbat1 4s ease-in-out infinite;
+        animation: rbat1 4s ease-in-out 3s infinite;
 
     }
 
@@ -242,7 +253,7 @@ p {
         transform: rotate(-30deg);
         top: 30%;
         right: 10%;
-        // animation: rbat2 4s ease-in-out infinite;
+        animation: rbat2 4s ease-in-out 2s infinite;
     }
 }
 
@@ -359,17 +370,21 @@ footer {
     }
 
     to {
-        transform: rotate(-90deg) translate(200px, -200px);
+        transform: rotate(-90deg) translate(100px, -20vw);
     }
 }
 
 @keyframes rbat2 {
     from {
-        transform: translateY(30px);
+        // transform: translateY(30px);
+        transform: rotate(0deg) translateY(0px) translateX(0);
     }
 
+    // to {
+    //     transform: translateY(-45vh);
+    // }
     to {
-        transform: translateY(-45vh);
+        transform: rotate(90deg) translate(10px, -45vh);
     }
 }
 
@@ -397,9 +412,43 @@ footer {
 
 @media (max-width: 1199px) {
 
-    nav {
-        display: none;
+    .topNav.active {
+        .mainNav {
+            right: 0;
+        }
     }
+    .toggler {
+        display: block;
+    }
+
+    .mainNav {
+        position: fixed;
+        width: 350px;
+        height: 100vh;
+        flex-direction: column;
+        right: -350px;
+        top: 0;
+        background: #1a0025;
+        z-index: 999;
+        padding: 80px 30px 30px;
+        transition: all 0.3s ease-in-out;
+
+        li {
+            width: 100%;
+
+            a {
+                display: block;
+            }
+        }
+    }
+    .close {
+        position: absolute;
+        top: 20px;
+        z-index: 999999;
+        right: 20px;
+        display: block;
+    }
+
 
     .right {
         justify-content: space-evenly;
